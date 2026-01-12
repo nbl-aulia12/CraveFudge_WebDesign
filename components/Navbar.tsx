@@ -21,9 +21,14 @@ const Navbar: React.FC<NavbarProps> = ({
         className="flex items-center gap-2 cursor-pointer"
         onClick={onGoHome}
       >
-        <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-200">
-          C
+        <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-purple-200 bg-white flex items-center justify-center">
+          <img
+            src="/picture/Logo.jpg"
+            alt="CraveFudge Logo"
+            className="w-full h-full object-contain"
+          />
         </div>
+
         <span className="text-2xl font-bold tracking-tight text-slate-800">
           Crave<span className="text-purple-600">Fudge</span>
         </span>
@@ -31,31 +36,16 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Navigation */}
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-        <button
-          onClick={onGoHome}
-          className="hover:text-purple-600 transition-colors"
-        >
+        <button onClick={onGoHome} className="hover:text-purple-600">
           Home
         </button>
-
-        <button
-          onClick={() => onNavigate('bmc')}
-          className="hover:text-purple-600 transition-colors"
-        >
+        <button onClick={() => onNavigate('bmc')} className="hover:text-purple-600">
           BMC
         </button>
-
-        <button
-          onClick={() => onNavigate('pitch-deck')}
-          className="hover:text-purple-600 transition-colors"
-        >
+        <button onClick={() => onNavigate('pitch-deck')} className="hover:text-purple-600">
           Pitch Deck
         </button>
-
-        <button
-          onClick={() => onNavigate('feedback')}
-          className="hover:text-purple-600 transition-colors"
-        >
+        <button onClick={() => onNavigate('feedback')} className="hover:text-purple-600">
           Feedback
         </button>
       </div>
@@ -69,25 +59,9 @@ const Navbar: React.FC<NavbarProps> = ({
               ? 'bg-purple-600 text-white shadow-lg'
               : 'text-slate-700 hover:text-purple-600 bg-slate-50 hover:bg-purple-50'
           }`}
-          title="Edit Website Content"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-            <path d="m15 5 4 4" />
-          </svg>
-          {isAdmin && (
-            <span className="text-xs font-bold pr-1">Admin</span>
-          )}
+          ✏️
+          {isAdmin && <span className="text-xs font-bold pr-1">Admin</span>}
         </button>
       </div>
     </nav>
