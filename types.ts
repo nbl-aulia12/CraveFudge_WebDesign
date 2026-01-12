@@ -29,3 +29,10 @@ export interface PastTheme {
   images: string[];
   cookies: Cookie[];
 }
+
+export interface SocialMedia {
+  platform: string;
+  username: string;
+  url?: string;
+  screenshots?: string[];
+}

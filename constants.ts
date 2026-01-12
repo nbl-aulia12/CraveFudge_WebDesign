@@ -1,4 +1,5 @@
 
+import { platform } from 'os';
 import { Cookie, PastTheme } from './types';
 
 export const COOKIES: Cookie[] = [
@@ -124,4 +125,26 @@ export const PAST_THEMES: PastTheme[] = [
       { id: 'b2-4', name: 'Winter Potion', description: 'Adonan cookies Oreo dengan white chocolate chips di setiap gigitan.', price: 18000, category: 'Chapter 2', tags: ['Package'] },
     ]
   }
+];
+
+export const SOCIAL_MEDIA = [
+  {
+    platform: 'Instagram',
+    username: '@cravefudge_',
+    url: 'https://www.instagram.com/cravefudge_?igsh=MTV5MXh1YTJxZHc3eg%3D%3D&utm_source=qr',
+  },
+  {
+    platform: 'TikTok',
+    username: '@cravefudge_',
+    url: 'https://www.tiktok.com/@cravefudge_?_r=1&_t=ZS-930Hty93SxU',
+  },
+  {
+    platform: 'Bisanara',
+    username: 'crave fudge',
+    screenshots: [
+      'picture/Bisanara (1).jpeg',
+      'picture/Bisanara (2).jpeg',
+      'picture/Bisanara (3).jpeg',
+    ],
+  },
 ];

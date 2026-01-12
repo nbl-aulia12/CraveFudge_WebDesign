@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
+import SocialShowcase from './components/SocialShowCase';
 import PastThemes from './components/PastThemes';
 import ProductCard from './components/ProductCard';
 import AssistantDrawer from './components/AssistantDrawer';
@@ -10,9 +12,17 @@ import ThemeDetail from './components/ThemeDetail';
 import BMCPage from './components/BMCPage';
 import PitchDeckPage from './components/PitchDeckPage';
 import FeedbackPage from './components/FeedBack';
-import { COOKIES as INITIAL_COOKIES, PAST_THEMES as INITIAL_THEMES } from './constants';
+
+import {
+  COOKIES as INITIAL_COOKIES,
+  PAST_THEMES as INITIAL_THEMES,
+} from './constants';
+
 import { Cookie, PastTheme } from './types';
 
+/* =======================
+   VIEW TYPE
+======================= */
 type View =
   | 'home'
   | 'theme-detail'
@@ -20,28 +30,30 @@ type View =
   | 'pitch-deck'
   | 'feedback';
 
+/* =======================
+   APP
+======================= */
 const App: React.FC = () => {
   const [cookies, setCookies] = useState<Cookie[]>(INITIAL_COOKIES);
   const [pastThemes, setPastThemes] = useState<PastTheme[]>(INITIAL_THEMES);
+
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
+
   const [currentView, setCurrentView] = useState<View>('home');
   const [selectedThemeId, setSelectedThemeId] = useState<string | null>(null);
 
-  const [siteContent, setSiteContent] = useState({
+  /* =======================
+     EDITABLE CONTENT
+  ======================= */
+  const [siteContent] = useState({
     hero: {
       title: 'Setiap Gigitan Adalah Pertunjukan.',
       description:
         'Di CraveFudge, kami mengubah momen membeli cookies menjadi petualangan magis lewat permainan interaktif, atraksi unik, dan dongeng singkat di setiap kepingnya.',
       buttonPrimary: 'Pilih Petualanganmu',
       buttonSecondary: 'Lihat Atraksi',
-    },
-    about: {
-      title: 'Visi Dibalik CraveFudge',
-      description:
-        'Kami mengemas cookies premium dengan narasi yang berubah setiap waktu, membuat setiap kunjungan menjadi pengalaman yang unik.',
-      philosophy: 'Life is a performance, and so is eating cookies.',
     },
     features: [
       {
@@ -62,10 +74,16 @@ const App: React.FC = () => {
     ],
   });
 
+  /* =======================
+     EFFECT
+  ======================= */
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentView]);
 
+  /* =======================
+     HANDLERS
+  ======================= */
   const handleEditClick = () => {
     if (isAdminMode) {
       setIsAdminOpen(true);
@@ -96,9 +114,14 @@ const App: React.FC = () => {
     setSelectedThemeId(null);
   };
 
+  /* =======================
+     RENDER CONTENT
+  ======================= */
   const renderContent = () => {
     if (currentView === 'theme-detail') {
-      const selectedTheme = pastThemes.find(t => t.id === selectedThemeId);
+      const selectedTheme = pastThemes.find(
+        t => t.id === selectedThemeId
+      );
       return selectedTheme ? (
         <ThemeDetail theme={selectedTheme} onBack={handleBackToHome} />
       ) : null;
@@ -108,12 +131,25 @@ const App: React.FC = () => {
     if (currentView === 'pitch-deck') return <PitchDeckPage />;
     if (currentView === 'feedback') return <FeedbackPage />;
 
+    /* ===== HOME ===== */
     return (
       <main className="animate-in fade-in duration-500">
         <Hero content={siteContent.hero} isAdminMode={isAdminMode} />
-        <Experience features={siteContent.features} isAdminMode={isAdminMode} />
-        <PastThemes themes={pastThemes} onSelectTheme={handleSelectTheme} />
 
+        <Experience
+          features={siteContent.features}
+          isAdminMode={isAdminMode}
+        />
+
+        {/* === SOCIAL MEDIA SECTION === */}
+        <SocialShowcase />
+
+        <PastThemes
+          themes={pastThemes}
+          onSelectTheme={handleSelectTheme}
+        />
+
+        {/* === PRODUCT SECTION === */}
         <section className="py-24 px-6 bg-slate-50/50">
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {cookies.map(cookie => (
@@ -129,6 +165,9 @@ const App: React.FC = () => {
     );
   };
 
+  /* =======================
+     RETURN
+  ======================= */
   return (
     <div className="min-h-screen bg-white">
       <Navbar
@@ -140,6 +179,7 @@ const App: React.FC = () => {
 
       {renderContent()}
 
+      {/* === FOOTER === */}
       <footer className="bg-slate-900 text-white py-12 px-6">
         <div className="max-w-7xl mx-auto flex gap-8 justify-center">
           <button onClick={() => handleNavigate('bmc')}>BMC</button>
