@@ -141,6 +141,7 @@ export const SOCIAL_MEDIA = [
   {
     platform: 'Bisanara',
     username: 'crave fudge',
+    url: 'https://bisanara.com/shops/crave-fudge-192342',
     screenshots: [
       'picture/Bisanara (1).jpeg',
       'picture/Bisanara (2).jpeg',
